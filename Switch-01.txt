@@ -1,0 +1,23 @@
+enable
+configure terminal
+hostname SW-01
+enable secret CARLOSZ*enable
+username CARLOSZ privilege 15 secret 123456
+ip domain-name 1rede.local
+crypto key generate rsa general-key modulus 1024
+line vty 0 15
+transport input ssh
+password CARLOSZ*vty
+login local
+exit
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS!"
+line console 0
+password CARLOSZ*console
+login local
+exit
+service password-encryption
+ip default-gateway 192.168.0.1 
+interface vlan 1
+ip address 192.168.0.254 255.255.255.0
+no shutdown
+exit

@@ -1,0 +1,25 @@
+enable
+conf t
+hostname RT-01
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS!"
+username CARLOSZ privilege 15 secret 123456 
+enable secret CARLOSZ*enable
+line console 0
+password CARLOSZ*console
+login local
+ip domain-name 1rede.local
+crypto key generate rsa general-keys modulus 1024
+line vty 0 15 
+password CARLOSZ*vty
+login local
+exit
+interface gigabitethernet 0/0
+ip address 192.168.0.1 255.255.255.0
+no shutdown
+exit
+interface gigabitethernet 0/1
+ip address 172.16.0.1 255.255.0.0
+no shutdown
+exit
+exit
+wr
